@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিঃ</title>
+    <style>
+        :root {
+            --primary-color: #006a4e;
+            --primary-dark: #004d38;
+            --secondary-color: #189ab4;
+            --accent-color: #d4af37;
+            --bg-light: #f4f7f6;
+            --text-dark: #2c3e50;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo h2 { font-size: 1.3rem; color: var(--white); }
+
+        nav ul { display: flex; list-style: none; gap: 15px; }
+
+        nav ul li a { color: var(--white); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+
+        .top-notice-bar {
+            background-color: #003323;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 5%;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .notice-content {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            flex-grow: 1;
+            margin-right: 15px;
+        }
+
+        .notice-label {
+            background: var(--accent-color);
+            color: var(--primary-dark);
+            padding: 2px 8px;
+            font-weight: bold;
+            border-radius: 3px;
+            margin-right: 10px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        marquee { width: 100%; }
+
+        .live-clock {
+            color: #d4af37;
+            font-weight: bold;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2px 10px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 106, 78, 0.85), rgba(0, 77, 56, 0.85)), url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h1 { font-size: 2.1rem; margin-bottom: 15px; }
+
+        .hero p { font-size: 1.05rem; max-width: 700px; margin: 0 auto 25px auto; }
+
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-dark);
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .section { padding: 45px 5%; text-align: center; }
+
+        .section-title { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 10px; }
+
+        .section-subtitle { color: #666; max-width: 750px; margin: 0 auto 30px auto; }
+
+        .grid-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            width: 270px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+            text-align: left;
+        }
+
+        .card h3 { font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 8px; }
+
+        .card .price { font-size: 1.3rem; color: var(--accent-color); font-weight: bold; margin-bottom: 5px; }
+
+        .card .desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+
+        .card-actions { display: flex; gap: 5px; margin-top: 10px; }
+
+        .btn-sm { padding: 5px 10px; font-size: 0.8rem; border: none; border-radius: 3px; cursor: pointer; }
+
+        .btn-edit { background: #ffc107; color: #000; }
+        .btn-approve { background: #28a745; color: #fff; }
+        .btn-delete { background: #dc3545; color: #fff; }
+
+        .doc-requirements {
+            background: var(--white);
+            max-width: 650px;
+            margin: 0 auto 25px auto;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+
+        .doc-requirements h4 { color: var(--primary-color); margin-bottom: 10px; }
+
+        .doc-requirements ul { margin-left: 20px; color: #444; }
+
+        .form-container {
+            background: var(--white);
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+
+        .form-group { margin-bottom: 15px; }
+
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.95rem; }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem;
+        }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
+        }
+
+        .modal-content { background: #fff; padding: 25px; border-radius: 8px; width: 90%; max-width: 450px; }
+
+        .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
+
+        .fund-box {
+            background: var(--white); max-width: 800px; margin: 0 auto; padding: 25px;
+            border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); text-align: left;
+        }
+
+        .fund-box ul li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .rule-item-admin {
+            background: #fdfdfd;
+            border-left: 4px solid var(--primary-color);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
+            background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center;
+            font-size: 30px; box-shadow: 2px 2px 8px rgba(0,0,0,0.3); z-index: 10000;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
+        }
+
+        footer {
+            background: var(--primary-dark); color: var(--white); padding: 30px 5% 15px 5%;
+            margin-top: 40px; text-align: center;
+        }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 0.85rem; color: #ccc; }
+
+        .secret-trigger { cursor: default; user-select: none; }
+
+        #adminDashboard {
+            display: none;
+            padding: 30px 5%;
+            background: #eef4f2;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .admin-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .admin-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .status-pending { background: #ffeeba; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+
+        .msg-card {
+            background: #fdfdfd;
+            border-left: 4px solid var(--secondary-color);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 12px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+            .top-notice-bar { flex-direction: column; gap: 5px; text-align: center; }
+            .notice-content { width: 100%; margin-right: 0; }
+            .admin-header { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="userScreen">
+        <header>
+            <div class="logo">
+                <h2>খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিঃ</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">হোম</a></li>
+                    <li><a href="#products">ন্যায্যমূল্যের পণ্য</a></li>
+                    <li><a href="#items">সুবিধাসমূহ</a></li>
+                    <li><a href="#register">সদস্য হন</a></li>
+                    <li><a href="#status">স্ট্যাটাস চেক</a></li>
+                    <li><a href="#fund">ওমরাহ ফান্ড</a></li>
+                    <li><a href="#feedback">মেসেজ দিন</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="top-notice-bar">
+            <div class="notice-content">
+                <span class="notice-label">ঘোষণা:</span>
+                <marquee id="userNoticeText" scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+                    খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিমিটেড-এর পক্ষ থেকে আপনাকে স্বাগতম। সদস্যদের জন্য সুলভ মূল্যে নিত্যপ্রয়োজনীয় পণ্য ও বিশেষ অগ্রীম জমা সুবিধায় ওমরাহ পলিসির সুযোগ গ্রহণ করুন।
+                </marquee>
+            </div>
+            <div class="live-clock" id="liveClockDisplay">সময় লোড হচ্ছে...</div>
+        </div>
+
+        <section id="home" class="hero">
+            <h1>খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিমিটেড</h1>
+            <p>পবিত্র ওমরাহ পালনের বিশ্বস্ত প্রতিষ্ঠান ও সামাজিক কল্যাণ ফোরাম। সদস্যদের জন্য ন্যায্যমূল্যে পণ্য সামগ্রী সরবরাহ ও সহজ অগ্রীম জমা সুবিধায় ওমরাহ পালন।</p>
+            <div class="hero-buttons">
+                <a href="#register" class="btn-primary">সরাসরি সদস্য হন</a>
+                <a href="#feedback" class="btn-secondary">কথা বলুন / মতামত দিন</a>
+            </div>
+        </section>
+
+        <section id="products" class="section">
+            <h2 class="section-title">সদস্যদের জন্য ন্যায্যমূল্যের পণ্য সামগ্রী</h2>
+            <p class="section-subtitle">আমাদের নিবন্ধিত সদস্যগণ এখান থেকে বিশেষ ভর্তুকি ও ন্যায্যমূল্যে নিত্যপ্রয়োজনীয় পণ্য সামগ্রী সংগ্রহ করতে পারবেন।</p>
+            <div class="grid-container" id="user-product-list"></div>
+        </section>
+
+        <section id="items" class="section" style="background-color: #eef4f2;">
+            <h2 class="section-title">আমাদের অন্যান্য সেবা ও সুবিধাসমূহ</h2>
+            <p class="section-subtitle">নিবন্ধিত সদস্যদের জন্য নির্ধারিত অন্যান্য সুবিধা এবং নিয়মিত আপডেটকৃত অফারসমূহ।</p>
+            <div class="grid-container" id="user-item-list"></div>
+        </section>
+
+        <section id="register" class="section">
+            <h2 class="section-title">অনলাইন সদস্য নিবন্ধন</h2>
+            <p class="section-subtitle">সহজেই তথ্য ও প্রয়োজনীয় ডকুমেন্টস দিয়ে অনলাইনে খিদমাহ্ সওদা পরিবারের সদস্য হন।</p>
+            
+            <div class="doc-requirements">
+                <h4>📋 সদস্য হতে প্রয়োজনীয় যা যা জমা দিতে হবে:</h4>
+                <ul>
+                    <li>আবেদনকারীর ১ কপি পাসপোর্ট সাইজ ছবি।</li>
+                    <li>জাতীয় পরিচয়পত্র (NID) অথবা পাসপোর্ট / ইকামার ফটোকপি।</li>
+                    <li>জরুরি যোগাযোগের জন্য সচল হোয়াটসঅ্যাপ নম্বর।</li>
+                    <li>ফেরতযোগ্য সদস্য ফি।</li>
+                </ul>
+            </div>
+
+            <div class="form-container">
+                <form id="registrationForm" onsubmit="submitRegistration(event)">
+                    <div class="form-group">
+                        <label>আপনার পূর্ণ নাম (NID/পাসপোর্ট অনুযায়ী):</label>
+                        <input type="text" id="regName" required placeholder="আপনার নাম লিখুন">
+                    </div>
+                    <div class="form-group">
+                        <label>পিতার নাম (Father's Name):</label>
+                        <input type="text" id="regFatherName" required placeholder="পিতার নাম লিখুন">
+                    </div>
+                    <div class="form-group">
+                        <label>মোবাইল নম্বর (হোয়াটসঅ্যাপ):</label>
+                        <input type="tel" id="regPhone" required placeholder="যেমন: 01711651187">
+                    </div>
+                    <div class="form-group">
+                        <label>জাতীয় পরিচয়পত্র (NID) / পাসপোর্ট নম্বর:</label>
+                        <input type="text" id="regNid" required placeholder="NID বা পাসপোর্ট নম্বর দিন">
+                    </div>
+                    <div class="form-group">
+                        <label>বর্তমান অবস্থান (দেশ):</label>
+                        <select id="regLocation" required>
+                            <option value="বাংলাদেশ">বাংলাদেশ</option>
+                            <option value="সৌদি আরব">সৌদি আরব</option>
+                            <option value="অন্যান্য">অন্যান্য</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>বিস্তারিত ঠিকানা (গ্রাম/মহল্লা, ডাকঘর, থানা/উপজেলা, জেলা):</label>
+                        <textarea id="regAddress" rows="3" required placeholder="যেমন: গ্রাম: রামপুর, পোস্ট: কালীগঞ্জ, থানা: কালীগঞ্জ, জেলা: ঝিনাইদহ"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>সদস্যতার ধরন ও সেবা গ্রহণ পদ্ধতি:</label>
+                        <select id="regPlan" required>
+                            <option value="শুধু সদস্য হয়ে সেবা/বাজার গ্রহণ">শুধু সাধারণ সদস্য হয়ে কেনাকাটা/সেবা গ্রহণ</option>
+                            <option value="সম্পূর্ণ নগদ পরিশোধে ওমরাহ">সম্পূর্ণ নগদ পরিশোধে ওমরাহ পালন</option>
+                            <option value="৬ মাস (অগ্রীম জমা)">৬ মাস (অগ্রীম জমার মাধ্যমে ওমরাহ)</option>
+                            <option value="১২ মাস (অগ্রীম জমা)">১২ মাস (অগ্রীম জমার মাধ্যমে ওমরাহ)</option>
+                            <option value="২৪ মাস (অগ্রীম জমা)">২৪ মাস (অগ্রীম জমার মাধ্যমে ওমরাহ)</option>
+                            <option value="৩৬ মাস (অগ্রীম জমা)">৩৬ মাস (অগ্রীম জমার মাধ্যমে ওমরাহ)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="regSubmitBtn" class="btn-primary" style="width: 100%;">নিবন্ধন ফরম জমা দিন</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="status" class="section" style="background-color: #eef4f2;">
+            <h2 class="section-title">সদস্য পদ স্ট্যাটাস চেক</h2>
+            <p class="section-subtitle">আপনার NID বা পাসপোর্ট নম্বর দিয়ে আবেদনপত্রের বর্তমান অবস্থা যাচাই করুন।</p>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label>NID / পাসপোর্ট নম্বর লিখুন:</label>
+                    <input type="text" id="checkNidInput" placeholder="আপনার NID/পাসপোর্ট নম্বর">
+                </div>
+                <button class="btn-primary" style="width: 100%;" onclick="checkStatus()">স্ট্যাটাস চেক করুন</button>
+                <div id="statusResult" style="margin-top: 15px; text-align: center; font-weight: bold; font-size: 1.05rem;"></div>
+            </div>
+        </section>
+
+        <section id="fund" class="section">
+            <h2 class="section-title">ওমরাহ ফান্ড ও অগ্রীম জমা নিয়মাবলী</h2>
+            <div class="fund-box">
+                <ul id="user-rules-list"></ul>
+            </div>
+        </section>
+
+        <section id="feedback" class="section" style="background-color: #eef4f2;">
+            <h2 class="section-title">সুবিধা-অসুবিধা বা প্রশ্ন পাঠান</h2>
+            <p class="section-subtitle">আপনার যেকোনো মতামত, অভিযোগ বা সুবিধার বিষয় আমাদের সাথে শেয়ার করুন।</p>
+            
+            <div class="form-container">
+                <form onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label>নাম:</label>
+                        <input type="text" id="fbName" required placeholder="আপনার নাম">
+                    </div>
+                    <div class="form-group">
+                        <label>ফোন নম্বর:</label>
+                        <input type="tel" id="fbPhone" required placeholder="আপনার নম্বর">
+                    </div>
+                    <div class="form-group">
+                        <label>বার্তার বিষয়:</label>
+                        <select id="fbType">
+                            <option value="সুবিধা সংক্রান্ত">সুবিধা সংক্রান্ত</option>
+                            <option value="অসুবিধা / অভিযোগ">অসুবিধা / অভিযোগ</option>
+                            <option value="পরামর্শ">পরামর্শ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>আপনার মেসেজ:</label>
+                        <textarea id="fbMessage" rows="4" required placeholder="বিস্তারিত এখানে লিখুন..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">মেসেজ পাঠান</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- WhatsApp Floating Button updated with Channel Link -->
+        <a href="https://whatsapp.com/channel/0029VbDJG36LCoX5HlHTAP0W" target="_blank" class="whatsapp-float" title="আমাদের হোয়াটসঅ্যাপ চ্যানেলে যোগ দিন">💬</a>
+
+        <footer id="contact">
+            <div style="max-width: 800px; margin: 0 auto 20px auto; text-align: center;">
+                <h3 style="color: var(--accent-color); margin-bottom: 10px;">খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিঃ</h3>
+                <p>🇧🇩 <strong>বাংলাদেশ:</strong> +8801711651187</p>
+                <p>🇸🇦 <strong>সৌদি আরব:</strong> +966547628925</p>
+                <p style="margin-top: 10px;">
+                    <a href="https://whatsapp.com/channel/0029VbDJG36LCoX5HlHTAP0W" target="_blank" style="color: #25d366; font-weight: bold; text-decoration: none;">📢 অফিশিয়াল হোয়াটসঅ্যাপ চ্যানেল ফলো করুন</a>
+                </p>
+            </div>
+            <div class="footer-bottom">
+                <p><span class="secret-trigger" onclick="secretClick()">&copy;</span> ২০২৬ খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিমিটেড। সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="adminDashboard">
+        <div class="admin-header">
+            <h2>⚙️ এডমিন ফুল কন্ট্রোল প্যানেল</h2>
+            <div>
+                <button class="btn-secondary" style="padding: 6px 12px; margin-right: 5px;" onclick="changeAdminPin()">পিন পরিবর্তন</button>
+                <button class="btn-primary" style="background: #dc3545; color: #fff; padding: 6px 12px;" onclick="logoutAdmin()">লগআউট (বের হন)</button>
+            </div>
+        </div>
+
+        <div class="admin-box">
+            <h3>📩 আগত মেসেজসমূহ (ভিজিটরদের প্রতিক্রিয়া)</h3>
+            <div id="admin-message-list"></div>
+        </div>
+
+        <div class="admin-box">
+            <h3>👥 নিবন্ধিত সদস্যদের তালিকা</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>নাম</th>
+                            <th>পিতার নাম</th>
+                            <th>ফোন নম্বর</th>
+                            <th>NID / পাসপোর্ট</th>
+                            <th>অবস্থান ও প্রকার</th>
+                            <th>অবস্থা</th>
+                            <th>অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-member-table"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="admin-box">
+            <h3>📢 চলমান নোটিশ পরিবর্তন করুন</h3>
+            <div class="form-group">
+                <label>বর্তমান নোটিশ বার্তা:</label>
+                <textarea id="adminNoticeInput" rows="3" placeholder="নোটিশ টাইপ করুন..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="saveAdminNotice()">নোটিশ সেভ করুন</button>
+        </div>
+
+        <div class="admin-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 style="margin-bottom: 0;">📜 ওমরাহ ফান্ড নিয়মাবলী ম্যানেজমেন্ট</h3>
+                <button class="btn-primary" onclick="openRuleModal()">+ নতুন নিয়ম যোগ করুন</button>
+            </div>
+            <div id="admin-rules-list"></div>
+        </div>
+
+        <div class="admin-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 style="margin-bottom: 0;">🛒 পণ্য ম্যানেজমেন্ট</h3>
+                <button class="btn-primary" onclick="openProductModal()">+ নতুন পণ্য যোগ করুন</button>
+            </div>
+            <div class="grid-container" id="admin-product-list" style="justify-content: flex-start;"></div>
+        </div>
+
+        <div class="admin-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 style="margin-bottom: 0;">🎁 সুবিধা ও সেবা ম্যানেজমেন্ট</h3>
+                <button class="btn-primary" onclick="openItemModal()">+ নতুন সুবিধা যোগ করুন</button>
+            </div>
+            <div class="grid-container" id="admin-item-list" style="justify-content: flex-start;"></div>
+        </div>
+    </div>
+
+    <!-- Rule Modal -->
+    <div class="modal" id="ruleModal">
+        <div class="modal-content">
+            <h3 id="ruleModalTitle">নতুন নিয়ম যুক্ত করুন</h3>
+            <input type="hidden" id="editRuleIndex">
+            <div class="form-group">
+                <label>নিয়মের শিরোনাম (যেমন: শব্দ চয়ন, মেয়াদ):</label>
+                <input type="text" id="ruleTitle" placeholder="যেমন: শব্দ চয়ন">
+            </div>
+            <div class="form-group">
+                <label>বিস্তারিত নিয়ম/বিবরণ:</label>
+                <textarea id="ruleDesc" rows="3" placeholder="নিয়মের বিস্তারিত বিবরণ লিখুন..."></textarea>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-sm" style="background:#ccc;" onclick="closeModal('ruleModal')">বাতিল</button>
+                <button class="btn-primary" style="padding:6px 15px;" onclick="saveRule()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="itemModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">নতুন সুবিধা যুক্ত করুন</h3>
+            <input type="hidden" id="editIndex">
+            <div class="form-group">
+                <label>শিরোনাম/নাম:</label>
+                <input type="text" id="itemTitle" placeholder="যেমন: বিশেষ অফার বা প্যাকেজ">
+            </div>
+            <div class="form-group">
+                <label>মূল্য/ফি:</label>
+                <input type="text" id="itemPrice" placeholder="যেমন: ৳ ৫০ অথবা ৳ ১,২০,০০০">
+            </div>
+            <div class="form-group">
+                <label>বিস্তারিত বিবরণ:</label>
+                <textarea id="itemDesc" rows="3" placeholder="বিস্তারিত তথ্য..."></textarea>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-sm" style="background:#ccc;" onclick="closeModal('itemModal')">বাতিল</button>
+                <button class="btn-primary" style="padding:6px 15px;" onclick="saveItem()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <h3 id="prodModalTitle">নতুন পণ্য যুক্ত করুন</h3>
+            <input type="hidden" id="editProdIndex">
+            <div class="form-group">
+                <label>পণ্যের নাম:</label>
+                <input type="text" id="prodTitle" placeholder="যেমন: মিনিকেট চাল (২৫ কেজী)">
+            </div>
+            <div class="form-group">
+                <label>ন্যায্য মূল্য:</label>
+                <input type="text" id="prodPrice" placeholder="যেমন: ৳ ১,৪৫০ (বাজার মূল্য: ৳ ১,৬০০)">
+            </div>
+            <div class="form-group">
+                <label>পণ্যের বিবরণ/পরিমাণ:</label>
+                <textarea id="prodDesc" rows="3" placeholder="যেমন: প্রিমিয়াম কোয়ালিটি, শুধুমাত্র সদস্যদের জন্য।"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-sm" style="background:#ccc;" onclick="closeModal('productModal')">বাতিল</button>
+                <button class="btn-primary" style="padding:6px 15px;" onclick="saveProduct()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbxRyWN0ykvA2mwAkp9JHV6QFjeR5ZbW3t2uXU-x7BHs8JAE5bLFlkZpAU3sAVTp9vAJ/exec";
+
+        let rules = JSON.parse(localStorage.getItem('khidmah_rules')) || [
+            { title: "শব্দ চয়ন", desc: "ওমরাহ ফান্ডে ‘সঞ্চয়’ শব্দটি ব্যবহার হবে না, এর পরিবর্তে ‘অগ্রীম জমা’ হিসেবে গণ্য হবে।" },
+            { title: "মেয়াদ", desc: "সদস্যগণ ৬, ১২, ২৪ অথবা ৩৬ মাস পর্যন্ত অগ্রীম জমা দিতে পারবেন।" },
+            { title: "বিনা লাভে ধার (করযে হাসানা)", desc: "ওমরাহ করার জন্য পর্যাপ্ত টাকা না হলে, বাকি টাকা বিনা লাভে ধার হিসেবে দেওয়া হবে।" },
+            { title: "ধার পরিশোধ", desc: "ওমরাহ শেষে ৩ থেকে ৬ মাসের কিস্তিতে উক্ত ধার পরিশোধ করতে হবে।" }
+        ];
+
+        let items = JSON.parse(localStorage.getItem('khidmah_items')) || [
+            { title: "ওমরাহ প্যাকেজ সুবিধা", price: "৳ ১,২০,০০০", desc: "সকল সুবিধা সংবলিত প্রিমিয়াম অগ্রীম জমা প্যাকেজ।" }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('khidmah_products')) || [
+            { title: "মিনিকেট চাল (২৫ কেজি)", price: "৳ ১,৪৫০", desc: "বাজার দর ৳ ১,৬০০। সদস্যদের জন্য বিশেষ ভর্তুকি।" },
+            { title: "সয়াবিন তেল (৫ লিটার)", price: "৳ ৮২০", desc: "বাজার দর ৳ ৮৭০। খাঁটি ও মানসম্মত।" }
+        ];
+
+        let membersList = JSON.parse(localStorage.getItem('khidmah_members_full')) || [];
+        let messagesList = JSON.parse(localStorage.getItem('khidmah_user_messages')) || [];
+
+        let clickCount = 0;
+        let clickTimer;
+
+        function initNoticeAndClock() {
+            const savedNotice = localStorage.getItem('khidmah_notice_text');
+            if (savedNotice) {
+                document.getElementById('userNoticeText').innerText = savedNotice;
+                document.getElementById('adminNoticeInput').value = savedNotice;
+            } else {
+                document.getElementById('adminNoticeInput').value = document.getElementById('userNoticeText').innerText;
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            document.getElementById('liveClockDisplay').innerText = now.toLocaleString('bn-BD', options);
+        }
+
+        function secretClick() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+
+            if (clickCount === 3) {
+                clickCount = 0;
+                let currentPin = localStorage.getItem('khidmah_admin_pin') || "1234";
+                let pass = prompt("এডমিন পিন নম্বর লিখুন:");
+                
+                if(pass === currentPin) {
+                    document.getElementById('userScreen').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                    window.scrollTo(0, 0);
+                    renderAll();
+                } else if(pass !== null) {
+                    alert("ভুল পিন দিয়েছেন!");
+                }
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('userScreen').style.display = 'block';
+            window.scrollTo(0, 0);
+            renderAll();
+        }
+
+        function saveAdminNotice() {
+            const newNotice = document.getElementById('adminNoticeInput').value.trim();
+            if (newNotice) {
+                document.getElementById('userNoticeText').innerText = newNotice;
+                localStorage.setItem('khidmah_notice_text', newNotice);
+                alert("নোটিশ সফলভাবে আপডেট হয়েছে!");
+            } else {
+                alert("নোটিশ খালি রাখা যাবে না!");
+            }
+        }
+
+        function renderAll() {
+            renderUserRules();
+            renderAdminRules();
+            renderUserItems();
+            renderUserProducts();
+            renderAdminItems();
+            renderAdminProducts();
+            renderAdminMessages();
+            renderAdminMembers();
+        }
+
+        function renderUserRules() {
+            const container = document.getElementById('user-rules-list');
+            container.innerHTML = '';
+            rules.forEach((rule) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${rule.title}:</strong> ${rule.desc}`;
+                container.appendChild(li);
+            });
+        }
+
+        function renderAdminRules() {
+            const container = document.getElementById('admin-rules-list');
+            container.innerHTML = '';
+            if(rules.length === 0) {
+                container.innerHTML = '<p style="color:#777;">কোনো নিয়ম যোগ করা হয়নি।</p>';
+                return;
+            }
+            rules.forEach((rule, index) => {
+                const div = document.createElement('div');
+                div.className = 'rule-item-admin';
+                div.innerHTML = `
+                    <div>
+                        <strong>${rule.title}:</strong> ${rule.desc}
+                    </div>
+                    <div style="min-width: 110px; text-align: right;">
+                        <button class="btn-sm btn-edit" onclick="editRule(${index})">পরিবর্তন</button>
+                        <button class="btn-sm btn-delete" onclick="deleteRule(${index})">মুছুন</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function openRuleModal() {
+            document.getElementById('editRuleIndex').value = '';
+            document.getElementById('ruleModalTitle').innerText = 'নতুন নিয়ম যুক্ত করুন';
+            document.getElementById('ruleTitle').value = '';
+            document.getElementById('ruleDesc').value = '';
+            document.getElementById('ruleModal').style.display = 'flex';
+        }
+
+        function saveRule() {
+            const title = document.getElementById('ruleTitle').value.trim();
+            const desc = document.getElementById('ruleDesc').value.trim();
+            const index = document.getElementById('editRuleIndex').value;
+
+            if(!title || !desc) { alert("শিরোনাম ও বিবরণ উভয় ঘরই পূরণ করুন!"); return; }
+
+            if(index === '') { rules.push({ title, desc }); } 
+            else { rules[index] = { title, desc }; }
+
+            localStorage.setItem('khidmah_rules', JSON.stringify(rules));
+            closeModal('ruleModal');
+            renderAll();
+        }
+
+        function editRule(index) {
+            document.getElementById('editRuleIndex').value = index;
+            document.getElementById('ruleModalTitle').innerText = 'নিয়ম পরিবর্তন করুন';
+            document.getElementById('ruleTitle').value = rules[index].title;
+            document.getElementById('ruleDesc').value = rules[index].desc;
+            document.getElementById('ruleModal').style.display = 'flex';
+        }
+
+        function deleteRule(index) {
+            if(confirm("আপনি কি নিশ্চিত এই নিয়মটি মুছে ফেলতে চান?")) {
+                rules.splice(index, 1);
+                localStorage.setItem('khidmah_rules', JSON.stringify(rules));
+                renderAll();
+            }
+        }
+
+        function renderUserItems() {
+            const container = document.getElementById('user-item-list');
+            container.innerHTML = '';
+            items.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>${item.title}</h3><div class="price">${item.price}</div><div class="desc">${item.desc}</div>`;
+                container.appendChild(card);
+            });
+        }
+
+        function renderUserProducts() {
+            const container = document.getElementById('user-product-list');
+            container.innerHTML = '';
+            products.forEach((prod) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.borderTop = '4px solid var(--accent-color)';
+                card.innerHTML = `<h3>${prod.title}</h3><div class="price">${prod.price}</div><div class="desc">${prod.desc}</div>`;
+                container.appendChild(card);
+            });
+        }
+
+        function renderAdminItems() {
+            const container = document.getElementById('admin-item-list');
+            container.innerHTML = '';
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <div class="price">${item.price}</div>
+                    <div class="desc">${item.desc}</div>
+                    <div class="card-actions">
+                        <button class="btn-sm btn-edit" onclick="editItem(${index})">পরিবর্তন</button>
+                        <button class="btn-sm btn-delete" onclick="deleteItem(${index})">মুছুন</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderAdminProducts() {
+            const container = document.getElementById('admin-product-list');
+            container.innerHTML = '';
+            products.forEach((prod, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.borderTop = '4px solid var(--accent-color)';
+                card.innerHTML = `
+                    <h3>${prod.title}</h3>
+                    <div class="price">${prod.price}</div>
+                    <div class="desc">${prod.desc}</div>
+                    <div class="card-actions">
+                        <button class="btn-sm btn-edit" onclick="editProduct(${index})">পরিবর্তন</button>
+                        <button class="btn-sm btn-delete" onclick="deleteProduct(${index})">মুছুন</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderAdminMessages() {
+            const container = document.getElementById('admin-message-list');
+            container.innerHTML = '';
+            if (messagesList.length === 0) {
+                container.innerHTML = '<p style="color:#777;">এখনো কোনো নতুন মেসেজ আসেনি।</p>';
+                return;
+            }
+
+            messagesList.forEach((msg, index) => {
+                const box = document.createElement('div');
+                box.className = 'msg-card';
+                box.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <strong>${msg.name} (${msg.phone})</strong>
+                        <small style="color:#888;">${msg.time}</small>
+                    </div>
+                    <div style="font-size:0.85rem; color:var(--primary-color); font-weight:bold;">বিষয়: ${msg.type}</div>
+                    <p style="margin:5px 0;">${msg.message}</p>
+                    <div style="margin-top:8px;">
+                        <button onclick="window.open('https://api.whatsapp.com/send?phone=88' + '${msg.phone}'.replace(/^0/, ''), '_blank')" class="btn-sm" style="background:#25d366; color:#fff; border:none; padding: 4px 8px; border-radius: 4px; cursor:pointer;">হোয়াটসঅ্যাপে উত্তর দিন</button>
+                        <button class="btn-sm btn-delete" onclick="deleteMessage(${index})">ডিলিট</button>
+                    </div>
+                `;
+                container.appendChild(box);
+            });
+        }
+
+        function renderAdminMembers() {
+            const container = document.getElementById('admin-member-table');
+            container.innerHTML = '';
+            if (membersList.length === 0) {
+                container.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#777;">কোনো নিবন্ধিত সদস্য নেই।</td></tr>';
+                return;
+            }
+
+            membersList.forEach((m, index) => {
+                const tr = document.createElement('tr');
+                const isApproved = m.status === 'approved';
+                const statusBadge = isApproved 
+                    ? '<span class="status-badge status-approved">অনুমোদিত</span>' 
+                    : '<span class="status-badge status-pending">প্রসেসিং</span>';
+
+                tr.innerHTML = `
+                    <td>${m.name}</td>
+                    <td>${m.fatherName}</td>
+                    <td>${m.phone}</td>
+                    <td>${m.nid}</td>
+                    <td>${m.branch}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <button onclick="window.open('https://api.whatsapp.com/send?phone=88' + '${m.phone}'.replace(/^0/, ''), '_blank')" class="btn-sm" style="background:#25d366; color:#fff; border:none; padding: 4px 8px; border-radius: 4px; cursor:pointer;">হোয়াটসঅ্যাপ</button>
+                        ${!isApproved ? `<button class="btn-sm btn-approve" onclick="approveMember(${index})">অনুমোদন</button>` : ''}
+                        <button class="btn-sm btn-delete" onclick="deleteMember(${index})">বাতিল</button>
+                    </td>
+                `;
+                container.appendChild(tr);
+            });
+        }
+
+        function approveMember(index) {
+            membersList[index].status = 'approved';
+            localStorage.setItem('khidmah_members_full', JSON.stringify(membersList));
+            alert(`${membersList[index].name}-এর সদস্যপদ সফলভাবে অনুমোদন করা হয়েছে!`);
+            renderAdminMembers();
+        }
+
+        function deleteMember(index) {
+            if(confirm("আপনি কি নিশ্চিত এই সদস্যের আবেদনটি বাতিল/ডিলিট করতে চান?")) {
+                membersList.splice(index, 1);
+                localStorage.setItem('khidmah_members_full', JSON.stringify(membersList));
+                renderAdminMembers();
+            }
+        }
+
+        function deleteMessage(index) {
+            if(confirm("মেসেজটি মুছে ফেলতে চান?")) {
+                messagesList.splice(index, 1);
+                localStorage.setItem('khidmah_user_messages', JSON.stringify(messagesList));
+                renderAdminMessages();
+            }
+        }
+
+        function changeAdminPin() {
+            let currentPin = localStorage.getItem('khidmah_admin_pin') || "1234";
+            let oldPass = prompt("বর্তমান পিন দিন:");
+            
+            if (oldPass === currentPin) {
+                let newPass = prompt("নতুন ৪ থেকে ৬ ডিজিটের পিন দিন:");
+                if (newPass && newPass.trim() !== "") {
+                    let confirmPass = prompt("নতুন পিনটি পুনরায় দিন:");
+                    if (newPass === confirmPass) {
+                        localStorage.setItem('khidmah_admin_pin', newPass);
+                        alert("পিন সফলভাবে পরিবর্তন করা হয়েছে!");
+                    } else {
+                        alert("নতুন পিন নিশ্চিতকরণ মেলেনি!");
+                    }
+                }
+            } else if (oldPass !== null) {
+                alert("বর্তমান পিন ভুল হয়েছে!");
+            }
+        }
+
+        function openItemModal() {
+            document.getElementById('editIndex').value = '';
+            document.getElementById('modalTitle').innerText = 'নতুন সুবিধা যুক্ত করুন';
+            document.getElementById('itemTitle').value = '';
+            document.getElementById('itemPrice').value = '';
+            document.getElementById('itemDesc').value = '';
+            document.getElementById('itemModal').style.display = 'flex';
+        }
+
+        function saveItem() {
+            const title = document.getElementById('itemTitle').value;
+            const price = document.getElementById('itemPrice').value;
+            const desc = document.getElementById('itemDesc').value;
+            const index = document.getElementById('editIndex').value;
+
+            if(!title || !price) { alert("শিরোনাম ও দাম পূরণ করুন!"); return; }
+
+            if(index === '') { items.push({ title, price, desc }); } 
+            else { items[index] = { title, price, desc }; }
+
+            localStorage.setItem('khidmah_items', JSON.stringify(items));
+            closeModal('itemModal');
+            renderAll();
+        }
+
+        function editItem(index) {
+            document.getElementById('editIndex').value = index;
+            document.getElementById('modalTitle').innerText = 'সুবিধা বা তথ্য পরিবর্তন করুন';
+            document.getElementById('itemTitle').value = items[index].title;
+            document.getElementById('itemPrice').value = items[index].price;
+            document.getElementById('itemDesc').value = items[index].desc;
+            document.getElementById('itemModal').style.display = 'flex';
+        }
+
+        function deleteItem(index) {
+            if(confirm("আপনি কি এটি মুছে ফেলতে চান?")) {
+                items.splice(index, 1);
+                localStorage.setItem('khidmah_items', JSON.stringify(items));
+                renderAll();
+            }
+        }
+
+        function openProductModal() {
+            document.getElementById('editProdIndex').value = '';
+            document.getElementById('prodModalTitle').innerText = 'নতুন পণ্য যুক্ত করুন';
+            document.getElementById('prodTitle').value = '';
+            document.getElementById('prodPrice').value = '';
+            document.getElementById('prodDesc').value = '';
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function saveProduct() {
+            const title = document.getElementById('prodTitle').value;
+            const price = document.getElementById('prodPrice').value;
+            const desc = document.getElementById('prodDesc').value;
+            const index = document.getElementById('editProdIndex').value;
+
+            if(!title || !price) { alert("পণ্যের নাম ও দাম পূরণ করুন!"); return; }
+
+            if(index === '') { products.push({ title, price, desc }); } 
+            else { products[index] = { title, price, desc }; }
+
+            localStorage.setItem('khidmah_products', JSON.stringify(products));
+            closeModal('productModal');
+            renderAll();
+        }
+
+        function editProduct(index) {
+            document.getElementById('editProdIndex').value = index;
+            document.getElementById('prodModalTitle').innerText = 'পণ্যের তথ্য পরিবর্তন করুন';
+            document.getElementById('prodTitle').value = products[index].title;
+            document.getElementById('prodPrice').value = products[index].price;
+            document.getElementById('prodDesc').value = products[index].desc;
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function deleteProduct(index) {
+            if(confirm("আপনি কি এটি মুছে ফেলতে চান?")) {
+                products.splice(index, 1);
+                localStorage.setItem('khidmah_products', JSON.stringify(products));
+                renderAll();
+            }
+        }
+
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function submitRegistration(e) {
+            e.preventDefault();
+            const nidInput = document.getElementById('regNid').value.trim();
+
+            const existing = membersList.find(m => m.nid === nidInput);
+            if (existing) {
+                alert("দুঃখিত! এই NID/পাসপোর্ট দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট করা হয়েছে।");
+                return;
+            }
+
+            const submitBtn = document.getElementById('regSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "জমা হচ্ছে...";
+
+            const formData = {
+                name: document.getElementById('regName').value,
+                fatherName: document.getElementById('regFatherName').value,
+                nid: nidInput,
+                phone: document.getElementById('regPhone').value,
+                branch: document.getElementById('regLocation').value + " (" + document.getElementById('regPlan').value + ")",
+                address: document.getElementById('regAddress').value,
+                status: 'pending'
+            };
+
+            fetch(webAppUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                membersList.push(formData);
+                localStorage.setItem('khidmah_members_full', JSON.stringify(membersList));
+
+                alert(`ধন্যবাদ ${formData.name}! আপনার আবেদনটি জমা নেওয়া হয়েছে।`);
+                document.getElementById('registrationForm').reset();
+                submitBtn.disabled = false;
+                submitBtn.innerText = "নিবন্ধন ফরম জমা দিন";
+            })
+            .catch(error => {
+                alert("সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "নিবন্ধন ফরম জমা দিন";
+            });
+        }
+
+        function checkStatus() {
+            const input = document.getElementById('checkNidInput').value.trim();
+            const resultDiv = document.getElementById('statusResult');
+
+            if (!input) {
+                resultDiv.style.color = 'red';
+                resultDiv.innerText = 'অনুগ্রহ করে NID বা পাসপোর্ট নম্বর দিন।';
+                return;
+            }
+
+            const member = membersList.find(m => m.nid === input);
+
+            if (member) {
+                if (member.status === 'approved') {
+                    resultDiv.style.color = 'green';
+                    resultDiv.innerText = '🎉 অভিনন্দন! আপনাকে স্বাগতম খিদমাহ্ সওদা পরিবারের সদস্য হওয়ার জন্য।';
+                } else {
+                    resultDiv.style.color = '#006a4e';
+                    resultDiv.innerText = '⏳ আপনার আবেদনটি গৃহীত হয়েছে। সদস্যপদ প্রসেসিং অবস্থায় রয়েছে।';
+                }
+            } else {
+                resultDiv.style.color = '#dc3545';
+                resultDiv.innerText = '⚠️ এই নম্বর দিয়ে নিবন্ধিত কোনো আবেদন বা সদস্য খুঁজে পাওয়া যায়নি।';
+            }
+        }
+
+        function submitFeedback(e) {
+            e.preventDefault();
+            const now = new Date();
+            const timeStr = now.toLocaleString('bn-BD', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+
+            const newMsg = {
+                name: document.getElementById('fbName').value,
+                phone: document.getElementById('fbPhone').value,
+                type: document.getElementById('fbType').value,
+                message: document.getElementById('fbMessage').value,
+                time: timeStr
+            };
+
+            messagesList.push(newMsg);
+            localStorage.setItem('khidmah_user_messages', JSON.stringify(messagesList));
+
+            alert("ধন্যবাদ! আপনার বার্তাটি সফলভাবে পৌঁছানো হয়েছে।");
+            e.target.reset();
+        }
+
+        initNoticeAndClock();
+        renderAll();
+    </script>
+</body>
+</html>
