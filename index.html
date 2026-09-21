@@ -326,6 +326,71 @@
             .admin-header { flex-direction: column; gap: 10px; text-align: center; }
         }
     </style>
+
+    <!-- Firebase SDK (ES Module) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB1ItG-PBFAWvm8sLva6vm0EspBPC725-I",
+            authDomain: "ric-boss-77.firebaseapp.com",
+            projectId: "ric-boss-77",
+            storageBucket: "ric-boss-77.firebasestorage.app",
+            messagingSenderId: "147368384703",
+            appId: "1:147368384703:web:e6d02d110ae174f69b8e0a",
+            measurementId: "G-57M31SKMR1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const docRef = doc(db, "portal", "khidmahData");
+
+        // Firebase Sync Helper
+        window.saveDataToCloud = async function() {
+            try {
+                const fullPayload = {
+                    notice: window.khidmahData.notice,
+                    rules: window.rules,
+                    items: window.items,
+                    products: window.products,
+                    membersList: window.membersList,
+                    messagesList: window.messagesList
+                };
+                await setDoc(docRef, fullPayload);
+                console.log("Firebase synced successfully!");
+            } catch (e) {
+                console.error("Firebase sync error: ", e);
+            }
+        };
+
+        // Listen for Realtime Cloud Updates
+        onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if (data.notice !== undefined) window.khidmahData.notice = data.notice;
+                if (data.rules) window.rules = data.rules;
+                if (data.items) window.items = data.items;
+                if (data.products) window.products = data.products;
+                if (data.membersList) window.membersList = data.membersList;
+                if (data.messagesList) window.messagesList = data.messagesList;
+
+                // Sync LocalStorage backup
+                localStorage.setItem('khidmah_notice_text', window.khidmahData.notice);
+                localStorage.setItem('khidmah_rules', JSON.stringify(window.rules));
+                localStorage.setItem('khidmah_items', JSON.stringify(window.items));
+                localStorage.setItem('khidmah_products', JSON.stringify(window.products));
+                localStorage.setItem('khidmah_members_full', JSON.stringify(window.membersList));
+                localStorage.setItem('khidmah_user_messages', JSON.stringify(window.messagesList));
+
+                if (typeof window.renderAll === 'function') {
+                    window.renderAll();
+                }
+            } else {
+                window.saveDataToCloud();
+            }
+        });
+    </script>
 </head>
 <body>
 
@@ -646,36 +711,35 @@
     <script>
         const webAppUrl = "https://script.google.com/macros/s/AKfycbxRyWN0ykvA2mwAkp9JHV6QFjeR5ZbW3t2uXU-x7BHs8JAE5bLFlkZpAU3sAVTp9vAJ/exec";
 
-        let rules = JSON.parse(localStorage.getItem('khidmah_rules')) || [
+        window.khidmahData = {
+            notice: localStorage.getItem('khidmah_notice_text') || "খিদমাহ্ সওদা মাক্কাহ ওমরাহ লিমিটেড-এর পক্ষ থেকে আপনাকে স্বাগতম। সদস্যদের জন্য সুলভ মূল্যে নিত্যপ্রয়োজনীয় পণ্য ও বিশেষ অগ্রীম জমা সুবিধায় ওমরাহ পলিসির সুযোগ গ্রহণ করুন।"
+        };
+
+        window.rules = JSON.parse(localStorage.getItem('khidmah_rules')) || [
             { title: "শব্দ চয়ন", desc: "ওমরাহ ফান্ডে ‘সঞ্চয়’ শব্দটি ব্যবহার হবে না, এর পরিবর্তে ‘অগ্রীম জমা’ হিসেবে গণ্য হবে।" },
             { title: "মেয়াদ", desc: "সদস্যগণ ৬, ১২, ২৪ অথবা ৩৬ মাস পর্যন্ত অগ্রীম জমা দিতে পারবেন।" },
             { title: "বিনা লাভে ধার (করযে হাসানা)", desc: "ওমরাহ করার জন্য পর্যাপ্ত টাকা না হলে, বাকি টাকা বিনা লাভে ধার হিসেবে দেওয়া হবে।" },
             { title: "ধার পরিশোধ", desc: "ওমরাহ শেষে ৩ থেকে ৬ মাসের কিস্তিতে উক্ত ধার পরিশোধ করতে হবে।" }
         ];
 
-        let items = JSON.parse(localStorage.getItem('khidmah_items')) || [
+        window.items = JSON.parse(localStorage.getItem('khidmah_items')) || [
             { title: "ওমরাহ প্যাকেজ সুবিধা", price: "৳ ১,২০,০০০", desc: "সকল সুবিধা সংবলিত প্রিমিয়াম অগ্রীম জমা প্যাকেজ।" }
         ];
 
-        let products = JSON.parse(localStorage.getItem('khidmah_products')) || [
+        window.products = JSON.parse(localStorage.getItem('khidmah_products')) || [
             { title: "মিনিকেট চাল (২৫ কেজি)", price: "৳ ১,৪৫০", desc: "বাজার দর ৳ ১,৬০০। সদস্যদের জন্য বিশেষ ভর্তুকি।" },
             { title: "সয়াবিন তেল (৫ লিটার)", price: "৳ ৮২০", desc: "বাজার দর ৳ ৮৭০। খাঁটি ও মানসম্মত।" }
         ];
 
-        let membersList = JSON.parse(localStorage.getItem('khidmah_members_full')) || [];
-        let messagesList = JSON.parse(localStorage.getItem('khidmah_user_messages')) || [];
+        window.membersList = JSON.parse(localStorage.getItem('khidmah_members_full')) || [];
+        window.messagesList = JSON.parse(localStorage.getItem('khidmah_user_messages')) || [];
 
         let clickCount = 0;
         let clickTimer;
 
         function initNoticeAndClock() {
-            const savedNotice = localStorage.getItem('khidmah_notice_text');
-            if (savedNotice) {
-                document.getElementById('userNoticeText').innerText = savedNotice;
-                document.getElementById('adminNoticeInput').value = savedNotice;
-            } else {
-                document.getElementById('adminNoticeInput').value = document.getElementById('userNoticeText').innerText;
-            }
+            document.getElementById('userNoticeText').innerText = window.khidmahData.notice;
+            document.getElementById('adminNoticeInput').value = window.khidmahData.notice;
             updateClock();
             setInterval(updateClock, 1000);
         }
@@ -717,15 +781,20 @@
         function saveAdminNotice() {
             const newNotice = document.getElementById('adminNoticeInput').value.trim();
             if (newNotice) {
+                window.khidmahData.notice = newNotice;
                 document.getElementById('userNoticeText').innerText = newNotice;
                 localStorage.setItem('khidmah_notice_text', newNotice);
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
                 alert("নোটিশ সফলভাবে আপডেট হয়েছে!");
             } else {
                 alert("নোটিশ খালি রাখা যাবে না!");
             }
         }
 
-        function renderAll() {
+        window.renderAll = function() {
+            document.getElementById('userNoticeText').innerText = window.khidmahData.notice;
+            document.getElementById('adminNoticeInput').value = window.khidmahData.notice;
+
             renderUserRules();
             renderAdminRules();
             renderUserItems();
@@ -734,12 +803,12 @@
             renderAdminProducts();
             renderAdminMessages();
             renderAdminMembers();
-        }
+        };
 
         function renderUserRules() {
             const container = document.getElementById('user-rules-list');
             container.innerHTML = '';
-            rules.forEach((rule) => {
+            window.rules.forEach((rule) => {
                 const li = document.createElement('li');
                 li.innerHTML = `<strong>${rule.title}:</strong> ${rule.desc}`;
                 container.appendChild(li);
@@ -749,11 +818,11 @@
         function renderAdminRules() {
             const container = document.getElementById('admin-rules-list');
             container.innerHTML = '';
-            if(rules.length === 0) {
+            if(window.rules.length === 0) {
                 container.innerHTML = '<p style="color:#777;">কোনো নিয়ম যোগ করা হয়নি।</p>';
                 return;
             }
-            rules.forEach((rule, index) => {
+            window.rules.forEach((rule, index) => {
                 const div = document.createElement('div');
                 div.className = 'rule-item-admin';
                 div.innerHTML = `
@@ -784,10 +853,12 @@
 
             if(!title || !desc) { alert("শিরোনাম ও বিবরণ উভয় ঘরই পূরণ করুন!"); return; }
 
-            if(index === '') { rules.push({ title, desc }); } 
-            else { rules[index] = { title, desc }; }
+            if(index === '') { window.rules.push({ title, desc }); } 
+            else { window.rules[index] = { title, desc }; }
 
-            localStorage.setItem('khidmah_rules', JSON.stringify(rules));
+            localStorage.setItem('khidmah_rules', JSON.stringify(window.rules));
+            if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
+
             closeModal('ruleModal');
             renderAll();
         }
@@ -795,15 +866,16 @@
         function editRule(index) {
             document.getElementById('editRuleIndex').value = index;
             document.getElementById('ruleModalTitle').innerText = 'নিয়ম পরিবর্তন করুন';
-            document.getElementById('ruleTitle').value = rules[index].title;
-            document.getElementById('ruleDesc').value = rules[index].desc;
+            document.getElementById('ruleTitle').value = window.rules[index].title;
+            document.getElementById('ruleDesc').value = window.rules[index].desc;
             document.getElementById('ruleModal').style.display = 'flex';
         }
 
         function deleteRule(index) {
             if(confirm("আপনি কি নিশ্চিত এই নিয়মটি মুছে ফেলতে চান?")) {
-                rules.splice(index, 1);
-                localStorage.setItem('khidmah_rules', JSON.stringify(rules));
+                window.rules.splice(index, 1);
+                localStorage.setItem('khidmah_rules', JSON.stringify(window.rules));
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
                 renderAll();
             }
         }
@@ -811,7 +883,7 @@
         function renderUserItems() {
             const container = document.getElementById('user-item-list');
             container.innerHTML = '';
-            items.forEach((item) => {
+            window.items.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `<h3>${item.title}</h3><div class="price">${item.price}</div><div class="desc">${item.desc}</div>`;
@@ -822,7 +894,7 @@
         function renderUserProducts() {
             const container = document.getElementById('user-product-list');
             container.innerHTML = '';
-            products.forEach((prod) => {
+            window.products.forEach((prod) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.style.borderTop = '4px solid var(--accent-color)';
@@ -834,7 +906,7 @@
         function renderAdminItems() {
             const container = document.getElementById('admin-item-list');
             container.innerHTML = '';
-            items.forEach((item, index) => {
+            window.items.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -853,7 +925,7 @@
         function renderAdminProducts() {
             const container = document.getElementById('admin-product-list');
             container.innerHTML = '';
-            products.forEach((prod, index) => {
+            window.products.forEach((prod, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.style.borderTop = '4px solid var(--accent-color)';
@@ -873,12 +945,12 @@
         function renderAdminMessages() {
             const container = document.getElementById('admin-message-list');
             container.innerHTML = '';
-            if (messagesList.length === 0) {
+            if (window.messagesList.length === 0) {
                 container.innerHTML = '<p style="color:#777;">এখনো কোনো নতুন মেসেজ আসেনি।</p>';
                 return;
             }
 
-            messagesList.forEach((msg, index) => {
+            window.messagesList.forEach((msg, index) => {
                 const box = document.createElement('div');
                 box.className = 'msg-card';
                 box.innerHTML = `
@@ -900,12 +972,12 @@
         function renderAdminMembers() {
             const container = document.getElementById('admin-member-table');
             container.innerHTML = '';
-            if (membersList.length === 0) {
+            if (window.membersList.length === 0) {
                 container.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#777;">কোনো নিবন্ধিত সদস্য নেই।</td></tr>';
                 return;
             }
 
-            membersList.forEach((m, index) => {
+            window.membersList.forEach((m, index) => {
                 const tr = document.createElement('tr');
                 const isApproved = m.status === 'approved';
                 const statusBadge = isApproved 
@@ -930,24 +1002,27 @@
         }
 
         function approveMember(index) {
-            membersList[index].status = 'approved';
-            localStorage.setItem('khidmah_members_full', JSON.stringify(membersList));
-            alert(`${membersList[index].name}-এর সদস্যপদ সফলভাবে অনুমোদন করা হয়েছে!`);
+            window.membersList[index].status = 'approved';
+            localStorage.setItem('khidmah_members_full', JSON.stringify(window.membersList));
+            if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
+            alert(`${window.membersList[index].name}-এর সদস্যপদ সফলভাবে অনুমোদন করা হয়েছে!`);
             renderAdminMembers();
         }
 
         function deleteMember(index) {
             if(confirm("আপনি কি নিশ্চিত এই সদস্যের আবেদনটি বাতিল/ডিলিট করতে চান?")) {
-                membersList.splice(index, 1);
-                localStorage.setItem('khidmah_members_full', JSON.stringify(membersList));
+                window.membersList.splice(index, 1);
+                localStorage.setItem('khidmah_members_full', JSON.stringify(window.membersList));
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
                 renderAdminMembers();
             }
         }
 
         function deleteMessage(index) {
             if(confirm("মেসেজটি মুছে ফেলতে চান?")) {
-                messagesList.splice(index, 1);
-                localStorage.setItem('khidmah_user_messages', JSON.stringify(messagesList));
+                window.messagesList.splice(index, 1);
+                localStorage.setItem('khidmah_user_messages', JSON.stringify(window.messagesList));
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
                 renderAdminMessages();
             }
         }
@@ -989,10 +1064,12 @@
 
             if(!title || !price) { alert("শিরোনাম ও দাম পূরণ করুন!"); return; }
 
-            if(index === '') { items.push({ title, price, desc }); } 
-            else { items[index] = { title, price, desc }; }
+            if(index === '') { window.items.push({ title, price, desc }); } 
+            else { window.items[index] = { title, price, desc }; }
 
-            localStorage.setItem('khidmah_items', JSON.stringify(items));
+            localStorage.setItem('khidmah_items', JSON.stringify(window.items));
+            if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
+
             closeModal('itemModal');
             renderAll();
         }
@@ -1000,16 +1077,17 @@
         function editItem(index) {
             document.getElementById('editIndex').value = index;
             document.getElementById('modalTitle').innerText = 'সুবিধা বা তথ্য পরিবর্তন করুন';
-            document.getElementById('itemTitle').value = items[index].title;
-            document.getElementById('itemPrice').value = items[index].price;
-            document.getElementById('itemDesc').value = items[index].desc;
+            document.getElementById('itemTitle').value = window.items[index].title;
+            document.getElementById('itemPrice').value = window.items[index].price;
+            document.getElementById('itemDesc').value = window.items[index].desc;
             document.getElementById('itemModal').style.display = 'flex';
         }
 
         function deleteItem(index) {
             if(confirm("আপনি কি এটি মুছে ফেলতে চান?")) {
-                items.splice(index, 1);
-                localStorage.setItem('khidmah_items', JSON.stringify(items));
+                window.items.splice(index, 1);
+                localStorage.setItem('khidmah_items', JSON.stringify(window.items));
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
                 renderAll();
             }
         }
@@ -1031,10 +1109,12 @@
 
             if(!title || !price) { alert("পণ্যের নাম ও দাম পূরণ করুন!"); return; }
 
-            if(index === '') { products.push({ title, price, desc }); } 
-            else { products[index] = { title, price, desc }; }
+            if(index === '') { window.products.push({ title, price, desc }); } 
+            else { window.products[index] = { title, price, desc }; }
 
-            localStorage.setItem('khidmah_products', JSON.stringify(products));
+            localStorage.setItem('khidmah_products', JSON.stringify(window.products));
+            if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
+
             closeModal('productModal');
             renderAll();
         }
@@ -1042,16 +1122,17 @@
         function editProduct(index) {
             document.getElementById('editProdIndex').value = index;
             document.getElementById('prodModalTitle').innerText = 'পণ্যের তথ্য পরিবর্তন করুন';
-            document.getElementById('prodTitle').value = products[index].title;
-            document.getElementById('prodPrice').value = products[index].price;
-            document.getElementById('prodDesc').value = products[index].desc;
+            document.getElementById('prodTitle').value = window.products[index].title;
+            document.getElementById('prodPrice').value = window.products[index].price;
+            document.getElementById('prodDesc').value = window.products[index].desc;
             document.getElementById('productModal').style.display = 'flex';
         }
 
         function deleteProduct(index) {
             if(confirm("আপনি কি এটি মুছে ফেলতে চান?")) {
-                products.splice(index, 1);
-                localStorage.setItem('khidmah_products', JSON.stringify(products));
+                window.products.splice(index, 1);
+                localStorage.setItem('khidmah_products', JSON.stringify(window.products));
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
                 renderAll();
             }
         }
@@ -1062,7 +1143,7 @@
             e.preventDefault();
             const nidInput = document.getElementById('regNid').value.trim();
 
-            const existing = membersList.find(m => m.nid === nidInput);
+            const existing = window.membersList.find(m => m.nid === nidInput);
             if (existing) {
                 alert("দুঃখিত! এই NID/পাসপোর্ট দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট করা হয়েছে।");
                 return;
@@ -1089,8 +1170,9 @@
                 body: JSON.stringify(formData)
             })
             .then(() => {
-                membersList.push(formData);
-                localStorage.setItem('khidmah_members_full', JSON.stringify(membersList));
+                window.membersList.push(formData);
+                localStorage.setItem('khidmah_members_full', JSON.stringify(window.membersList));
+                if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
 
                 alert(`ধন্যবাদ ${formData.name}! আপনার আবেদনটি জমা নেওয়া হয়েছে।`);
                 document.getElementById('registrationForm').reset();
@@ -1114,7 +1196,7 @@
                 return;
             }
 
-            const member = membersList.find(m => m.nid === input);
+            const member = window.membersList.find(m => m.nid === input);
 
             if (member) {
                 if (member.status === 'approved') {
@@ -1143,8 +1225,9 @@
                 time: timeStr
             };
 
-            messagesList.push(newMsg);
-            localStorage.setItem('khidmah_user_messages', JSON.stringify(messagesList));
+            window.messagesList.push(newMsg);
+            localStorage.setItem('khidmah_user_messages', JSON.stringify(window.messagesList));
+            if (typeof window.saveDataToCloud === 'function') window.saveDataToCloud();
 
             alert("ধন্যবাদ! আপনার বার্তাটি সফলভাবে পৌঁছানো হয়েছে।");
             e.target.reset();
